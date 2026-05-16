@@ -4,7 +4,7 @@ import Image from 'next/image';
 import { motion } from 'framer-motion';
 import { Pokemon } from '@/lib/types';
 import AttacksList from './AttacksList';
-import EvolutionsList from './EvolutionsList';
+import EvolutionChain from './EvolutionChain';
 import TypeBadge from './TypeBadge';
 import { Hash } from 'lucide-react';
 
@@ -77,15 +77,11 @@ export default function PokemonCard({ pokemon }: Props) {
           <AttacksList attacks={pokemon.attacks} />
         </div>
 
-        {/* Evolutions section */}
-        {pokemon.evolutions && pokemon.evolutions.length > 0 && (
-          <>
-            <div className="mx-6 border-t border-border md:mx-8" />
-            <div className="p-6 md:p-8">
-              <EvolutionsList evolutions={pokemon.evolutions} />
-            </div>
-          </>
-        )}
+        {/* Evolution Chain section */}
+        <div className="mx-6 border-t border-border md:mx-8" />
+        <div className="p-6 md:p-8">
+          <EvolutionChain pokemon={pokemon} />
+        </div>
       </div>
     </motion.div>
   );

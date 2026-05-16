@@ -9,6 +9,7 @@ export interface Evolution {
   name: string;
   image: string;
   types: string[];
+  evolutions?: Evolution[] | null;
 }
 
 export interface Pokemon {
@@ -21,5 +22,5 @@ export interface Pokemon {
     fast: Attack[];
     special: Attack[];
   };
-  evolutions: Evolution[];
+  evolutions?: Evolution[] | null;
 }
