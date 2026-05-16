@@ -25,7 +25,9 @@ function PokemonSearchContent() {
   return (
     <>
       {loading && pokemonName && <PokemonSkeleton />}
-      {error && pokemonName && <NotFound />}
+      {!loading && pokemonName && (error || (data && !data.pokemon)) && (
+        <NotFound />
+      )}
       {data?.pokemon && <PokemonCard pokemon={data.pokemon as Pokemon} />}
       {!pokemonName && <EmptyState />}
     </>
