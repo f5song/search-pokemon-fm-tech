@@ -1,7 +1,12 @@
+'use client';
+
 import Image from 'next/image';
+import { motion } from 'framer-motion';
 import { Pokemon } from '@/lib/types';
 import AttacksList from './AttacksList';
 import EvolutionsList from './EvolutionsList';
+import TypeBadge from './TypeBadge';
+import { Hash } from 'lucide-react';
 
 interface Props {
   pokemon: Pokemon;
@@ -9,30 +14,79 @@ interface Props {
 
 export default function PokemonCard({ pokemon }: Props) {
   return (
-    <div className="max-w-4xl mx-auto p-6 bg-white rounded-lg shadow-lg">
-      <div className="text-center mb-6">
-        <Image
-          src={pokemon.image}
-          alt={pokemon.name}
-          width={200}
-          height={200}
-          className="mx-auto"
-        />
-        <h1 className="text-3xl font-bold capitalize mt-4">{pokemon.name}</h1>
-        <div className="flex gap-2 justify-center mt-2">
-          {pokemon.types.map((type) => (
-            <span
-              key={type}
-              className="px-3 py-1 bg-gray-200 rounded-full text-sm"
-            >
-              {type}
-            </span>
-          ))}
-        </div>
-      </div>
+    <motion.div
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.4, ease: 'easeOut' }}
+      className="mx-auto w-full max-w-3xl"
+    >
+      <div className="overflow-hidden rounded-2xl border border-border bg-card shadow-sm">
+        {/* Header section */}
+        <div className="relative flex flex-col items-center gap-6 p-6 md:flex-row md:items-start md:p-8">
+          {/* Background glow */}
+          <div className="pointer-events-none absolute inset-0 overflow-hidden">
+            <div className="absolute -right-20 -top-20 h-60 w-60 rounded-full bg-primary/5 blur-3xl" />
+          </div>
 
-      <AttacksList attacks={pokemon.attacks} />
-      <EvolutionsList evolutions={pokemon.evolutions} />
-    </div>
+          {/* Pokemon image */}
+          <motion.div
+            initial={{ scale: 0.8, opacity: 0 }}
+            animate={{ scale: 1, opacity: 1 }}
+            transition={{ duration: 0.5, delay: 0.1 }}
+            className="relative flex h-48 w-48 shrink-0 items-center justify-center rounded-2xl bg-muted/50"
+          >
+            <Image
+              src={pokemon.image}
+              alt={pokemon.name}
+              fill
+              className="relative z-10 object-contain p-2 drop-shadow-lg"
+              sizes="192px"
+              priority
+            />
+          </motion.div>
+
+          {/* Pokemon info */}
+          <div className="relative flex flex-col items-center gap-3 md:items-start">
+            <div className="flex items-center gap-2">
+              <Hash className="h-4 w-4 text-muted-foreground" />
+              <span className="font-mono text-sm text-muted-foreground">
+                {pokemon.id}
+              </span>
+            </div>
+            <h1 className="text-3xl font-bold capitalize tracking-tight text-card-foreground">
+              {pokemon.name}
+            </h1>
+            {pokemon.classification && (
+              <p className="text-sm text-muted-foreground">
+                {pokemon.classification}
+              </p>
+            )}
+            <div className="flex flex-wrap gap-2">
+              {pokemon.types.map((type) => (
+                <TypeBadge key={type} type={type} />
+              ))}
+            </div>
+          </div>
+        </div>
+
+        {/* Divider */}
+        <div className="mx-6 border-t border-border md:mx-8" />
+
+        {/* Attacks section */}
+        <div className="p-6 md:p-8">
+          <AttacksList attacks={pokemon.attacks} />
+        </div>
+
+        {/* Evolutions section */}
+        {pokemon.evolutions && pokemon.evolutions.length > 0 && (
+          <>
+            <div className="mx-6 border-t border-border md:mx-8" />
+            <div className="p-6 md:p-8">
+              <EvolutionsList evolutions={pokemon.evolutions} />
+            </div>
+          </>
+        )}
+      </div>
+    </motion.div>
   );
 }
