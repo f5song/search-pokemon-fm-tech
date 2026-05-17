@@ -85,7 +85,9 @@ export default function Home() {
               Explore detailed stats, attacks, and evolution chains for any Pokemon.
             </p>
           </div>
-          <SearchInput />
+          <Suspense fallback={<div className="h-14 w-full max-w-xl animate-pulse rounded-2xl bg-muted" />}>
+            <SearchInput />
+          </Suspense>
         </motion.div>
 
         {/* Content */}
