@@ -43,17 +43,17 @@ function flattenEvolutions(pokemon: PokemonBasic): ChainNode[] {
     },
   ];
 
-  let current = pokemon;
+  let current: PokemonBasic = pokemon;
   while (current.evolutions && current.evolutions.length > 0) {
-    const next = current.evolutions[0];
+    const nextEvolution: PokemonBasic = current.evolutions[0];
     nodes.push({
-      id: next.id,
-      name: next.name,
-      image: next.image,
-      types: next.types,
+      id: nextEvolution.id,
+      name: nextEvolution.name,
+      image: nextEvolution.image,
+      types: nextEvolution.types,
       isCurrent: false,
     });
-    current = next;
+    current = nextEvolution;
   }
 
   return nodes;
@@ -136,15 +136,15 @@ export function useEvolutionChain(
       // Walk forward from the current Pokemon's nested evolutions
       let current: PokemonBasic | undefined = currentPokemon;
       while (current?.evolutions && current.evolutions.length > 0) {
-        const next = current.evolutions[0];
+        const nextEvolution: PokemonBasic = current.evolutions[0];
         nodes.push({
-          id: next.id,
-          name: next.name,
-          image: next.image,
-          types: next.types,
+          id: nextEvolution.id,
+          name: nextEvolution.name,
+          image: nextEvolution.image,
+          types: nextEvolution.types,
           isCurrent: false,
         });
-        current = next;
+        current = nextEvolution;
       }
 
       return nodes;
