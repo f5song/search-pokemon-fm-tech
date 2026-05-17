@@ -6,7 +6,6 @@ import { Pokemon } from '@/lib/types';
 import AttacksList from './AttacksList';
 import EvolutionChain from './EvolutionChain';
 import TypeBadge from './TypeBadge';
-import { Hash } from 'lucide-react';
 
 interface Props {
   pokemon: Pokemon;
@@ -47,12 +46,6 @@ export default function PokemonCard({ pokemon }: Props) {
 
           {/* Pokemon info */}
           <div className="relative flex flex-col items-center gap-3 md:items-start">
-            <div className="flex items-center gap-2">
-              <Hash className="h-4 w-4 text-muted-foreground" />
-              <span className="font-mono text-sm text-muted-foreground">
-                {pokemon.id}
-              </span>
-            </div>
             <h1 className="text-3xl font-bold capitalize tracking-tight text-card-foreground">
               {pokemon.name}
             </h1>
