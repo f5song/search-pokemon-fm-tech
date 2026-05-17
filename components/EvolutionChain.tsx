@@ -125,11 +125,6 @@ function ChainNodeCard({
           {node.name}
         </span>
 
-        {/* ID */}
-        <span className="font-mono text-[10px] text-muted-foreground">
-          #{node.id}
-        </span>
-
         {/* Type badges */}
         <div className="flex flex-wrap justify-center gap-1">
           {node.types.map((type) => (

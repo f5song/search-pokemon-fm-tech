@@ -365,7 +365,7 @@ export default function SearchInput() {
                           </div>
 
                           {/* Name + types */}
-                          <div className="flex flex-1 flex-col gap-0.5 overflow-hidden">
+                            <div className="flex flex-1 flex-col gap-0.5 overflow-hidden">
                             <span className="text-sm font-medium capitalize text-foreground">
                               {segments.map((seg, i) =>
                                 seg.highlighted ? (
@@ -380,16 +380,10 @@ export default function SearchInput() {
                                 )
                               )}
                             </span>
-                            <div className="flex items-center gap-1.5">
-                              <span className="font-mono text-[10px] text-muted-foreground">
-                                #{result.id}
-                              </span>
-                              <span className="text-muted-foreground/30">·</span>
-                              <div className="flex gap-1">
-                                {result.types.map((type) => (
-                                  <TypeBadge key={type} type={type} size="sm" />
-                                ))}
-                              </div>
+                            <div className="flex items-center gap-1">
+                              {result.types.map((type) => (
+                                <TypeBadge key={type} type={type} size="sm" />
+                              ))}
                             </div>
                           </div>
 
